@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BTI-Project1-API", "BTI-Project1-API\BTI-Project1-API.csproj", "{1C550612-20B6-42D5-8BAE-7E25FC61BE2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{709CB073-5925-4EEA-8F1F-481208DB2310}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C550612-20B6-42D5-8BAE-7E25FC61BE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C550612-20B6-42D5-8BAE-7E25FC61BE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C550612-20B6-42D5-8BAE-7E25FC61BE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C550612-20B6-42D5-8BAE-7E25FC61BE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709CB073-5925-4EEA-8F1F-481208DB2310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709CB073-5925-4EEA-8F1F-481208DB2310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709CB073-5925-4EEA-8F1F-481208DB2310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709CB073-5925-4EEA-8F1F-481208DB2310}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6D47323-559C-4AA4-B85F-C82E0DCDDF9B}
+	EndGlobalSection
+EndGlobal
