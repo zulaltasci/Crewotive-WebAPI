@@ -78,7 +78,7 @@ namespace BTI_Project1_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Project>> PostProject(_Project project)
         {
-            _context.Project.Add(await Helper.Convert.ProjectToDbAsync(project, _context));
+            _context.Project.Add(await Helper.Convert.ProjectToDbAsync(project));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProject", new { id = project.Id }, project);

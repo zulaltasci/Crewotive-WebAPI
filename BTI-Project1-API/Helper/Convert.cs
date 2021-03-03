@@ -16,14 +16,16 @@ namespace BTI_Project1_API.Helper
         {
             _Person convertedPerson = new _Person();
 
-            #region Same property Content Cloning
+    #region Same property Content Cloning
 
-            convertedPerson.Id = person.Id;
-            convertedPerson.Name = person.Name;
-            convertedPerson.Surname = person.Surname;
-            convertedPerson.Role = person.Role;
-            convertedPerson.GithubLink = person.GithubLink;
-            convertedPerson.LinkedInLink = person.LinkedInLink;
+    #region Unneeded
+
+            //convertedPerson.Id = person.Id;
+            //convertedPerson.Name = person.Name;
+            //convertedPerson.Surname = person.Surname;
+            //convertedPerson.Role = person.Role;
+            //convertedPerson.GithubLink = person.GithubLink;
+            //convertedPerson.LinkedInLink = person.LinkedInLink;
 
             //foreach (var property in typeof(Person).GetProperties())
             //{
@@ -31,9 +33,15 @@ namespace BTI_Project1_API.Helper
             //    var editedProp = property.GetValue(person);
             //    property.SetValue(convertedPerson, editedProp);
             //}
-            #endregion
 
-            #region Ids to Project Arrays
+    #endregion
+
+            convertedPerson = Helper.Copy.Action(person, convertedPerson);
+
+    #endregion
+
+    #region Ids to Project Arrays
+
             List<int> ids = new List<int>();
 
             foreach (var id in person.ProjectIds.Split('-')) 
@@ -49,7 +57,8 @@ namespace BTI_Project1_API.Helper
             }
 
             convertedPerson.Projects = projects.ToArray();
-            #endregion
+
+    #endregion
 
             return convertedPerson;
         }
@@ -58,7 +67,7 @@ namespace BTI_Project1_API.Helper
         {
             List<_Person> _People = new List<_Person>();
 
-            foreach (var item in context.Person)
+            foreach (var item in context.Person.ToList())
             {
                 _People.Add(await DbToPersonAsync(item, context));
             }
@@ -70,20 +79,31 @@ namespace BTI_Project1_API.Helper
         {
             _Project convertedProject = new _Project();
 
-            #region Same property Content Cloning
-            convertedProject.Id = project.Id;
-            convertedProject.Name = project.Name;
-            convertedProject.Explanation = project.Explanation;
-            convertedProject.GithubLink = project.GithubLink;
+    #region Same property Content Cloning
+
+    #region Unneeded
+
+            //convertedProject.Id = project.Id;
+            //convertedProject.Name = project.Name;
+            //convertedProject.Explanation = project.Explanation;
+            //convertedProject.GithubLink = project.GithubLink;
 
             //foreach (var property in typeof(Project).GetProperties())
             //{
-            //    //if (property.GetCustomAttributes(typeof(IgnoreCopy), false).Length > 0) continue;
-            //    property.SetValue(project, property.GetValue(convertedProject));
-            //}
-            #endregion
+            //    if (property.GetCustomAttributes(typeof(IgnoreCopy), false).Length > 0) continue;
 
-            #region Ids to Project Arrays
+            //    var property1 = typeof(_Project).GetProperty(property.Name);
+            //    property1.SetValue(convertedProject, property.GetValue(project));
+            //}
+
+    #endregion
+
+            convertedProject = Helper.Copy.Action(project, convertedProject);
+
+    #endregion
+
+    #region Ids to Project Arrays
+
             List<int> ids = new List<int>();
 
             foreach (var id in project.PersonIds.Split('-'))
@@ -99,7 +119,8 @@ namespace BTI_Project1_API.Helper
             }
 
             convertedProject.People = People.ToArray();
-            #endregion
+
+    #endregion
 
             return convertedProject;
         }
@@ -108,7 +129,7 @@ namespace BTI_Project1_API.Helper
         {
             List<_Project> _Projects = new List<_Project>();
 
-            foreach (var item in context.Project)
+            foreach (var item in context.Project.ToList())
             {
                 _Projects.Add(await DbToProjectAsync(item, context));
             }
@@ -116,20 +137,14 @@ namespace BTI_Project1_API.Helper
             return _Projects;
         }
     
-        
-        public static async Task<Person> PersonToDbAsync(_Person _person)
-        {
-            Person person = new Person();
 
-            return person;
-        }
 
-        public static async Task<Person> PersonToDbAsync(_Person person, ApplicationDbContext context)
+        public static async Task<Person> PersonToDbAsync(_Person person)
         {
             return new Person();
         }
 
-        public static async Task<Project> ProjectToDbAsync(_Project project, ApplicationDbContext context)
+        public static async Task<Project> ProjectToDbAsync(_Project project)
         {
             return new Project();
         }

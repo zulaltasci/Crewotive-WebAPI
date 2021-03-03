@@ -8,17 +8,16 @@ namespace BTI_Project1_API.Helper
 {
     public class Copy
     {
-        //public static T Action<T,K>(T from, K to)
-        //{
-        //    foreach (var property in typeof(T).GetProperties())
-        //    {
-        //        if (property.GetCustomAttributes(typeof(IgnoreCopy), false).Length > 0) continue;
-        //        var editedProp = property.GetValue(from);
-        //        if (editedProp == null) continue;
+        public static K Action<T, K>(T from, K to)
+        {
+            foreach (var property in typeof(T).GetProperties())
+            {
+                if (property.GetCustomAttributes(typeof(IgnoreCopy), false).Length > 0) continue;
 
-        //        property.SetValue(to, property.GetValue(from));
-        //    }
-        //    return to;
-        //}
+                var Prop = typeof(K).GetProperty(property.Name);
+                Prop.SetValue(to, property.GetValue(from));
+            }
+            return to;
+        }
     }
 }
