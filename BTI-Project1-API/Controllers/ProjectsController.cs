@@ -30,7 +30,7 @@ namespace BTI_Project1_API.Controllers
 
         // GET: api/Projects/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> GetProject(Guid id)
+        public async Task<ActionResult<_Project>> GetProject(Guid id)
         {
             var project = await _context.Project.FindAsync(id);
 
@@ -39,9 +39,7 @@ namespace BTI_Project1_API.Controllers
                 return NotFound();
             }
 
-            
-
-            return project;
+            return await Helper.Convert.DbToProjectAsync(project, _context); ;
         }
 
         // PUT: api/Projects/5

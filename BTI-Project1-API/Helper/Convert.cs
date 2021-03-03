@@ -33,9 +33,9 @@ namespace BTI_Project1_API.Helper
             #region Ids to Project Arrays
             List<Guid> ids = new List<Guid>();
 
-            foreach (var item in person.ProjectIds.Split('-'))
+            foreach (var id in person.ProjectIds.Split('-'))
             {
-                ids.Add(Guid.Parse(item));
+                ids.Add(Guid.Parse(id));
             }
 
             List<Project> projects = new List<Project>();
@@ -49,6 +49,45 @@ namespace BTI_Project1_API.Helper
             #endregion
 
             return convertedPerson;
+        }
+
+        public static async Task<_Project> DbToProjectAsync(Project project, ApplicationDbContext context)
+        {
+            _Project convertedProject = new _Project();
+
+            #region Same property Content Cloning
+            convertedProject.Id = project.Id;
+            convertedProject.Name = project.Name;
+            convertedProject.Explanation = project.Explanation;
+            convertedProject.GithubLink = project.GithubLink;
+
+            foreach (var property in typeof(Project).GetProperties())
+            {
+                if (property.Name.ToString() == "PersonIds") continue;
+                var editedProp = property.GetValue(project);
+                property.SetValue(project, editedProp);
+            }
+            #endregion
+
+            #region Ids to Project Arrays
+            List<Guid> ids = new List<Guid>();
+
+            foreach (var id in project.PersonIds.Split('-'))
+            {
+                ids.Add(Guid.Parse(id));
+            }
+
+            List<Person> People = new List<Person>();
+
+            foreach (var id in ids)
+            {
+                People.Add(await context.Person.FindAsync(id));
+            }
+
+            convertedProject.People = People.ToArray();
+            #endregion
+
+            return convertedProject;
         }
     }
 }
