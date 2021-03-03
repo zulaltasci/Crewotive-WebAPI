@@ -23,14 +23,14 @@ namespace BTI_Project1_API.Controllers
 
         // GET: api/Projects
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProject()
+        public async Task<ActionResult<IEnumerable<_Project>>> GetProject()
         {
-            return await _context.Project.ToListAsync();
+            return await Helper.Convert.DbToProjectListAsync(_context);
         }
 
         // GET: api/Projects/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<_Project>> GetProject(Guid id)
+        public async Task<ActionResult<_Project>> GetProject(int id)
         {
             var project = await _context.Project.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace BTI_Project1_API.Controllers
         // PUT: api/Projects/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(Guid id, Project project)
+        public async Task<IActionResult> PutProject(int id, Project project)
         {
             if (id != project.Id)
             {
@@ -86,7 +86,7 @@ namespace BTI_Project1_API.Controllers
 
         // DELETE: api/Projects/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProject(Guid id)
+        public async Task<IActionResult> DeleteProject(int id)
         {
             var project = await _context.Project.FindAsync(id);
             if (project == null)
@@ -100,7 +100,7 @@ namespace BTI_Project1_API.Controllers
             return NoContent();
         }
 
-        private bool ProjectExists(Guid id)
+        private bool ProjectExists(int id)
         {
             return _context.Project.Any(e => e.Id == id);
         }

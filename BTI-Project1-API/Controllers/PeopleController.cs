@@ -24,14 +24,14 @@ namespace BTI_Project1_API.Controllers
 
         // GET: api/People
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPerson()
+        public async Task<ActionResult<IEnumerable<_Person>>> GetPerson()
         {
-            return await _context.Person.ToListAsync();
+            return await Helper.Convert.DbToPersonListAsync(_context);
         }
 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<_Person>> GetPerson(Guid id)
+        public async Task<ActionResult<_Person>> GetPerson(int id)
         {
             var person = await _context.Person.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace BTI_Project1_API.Controllers
         // PUT: api/People/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(Guid id, Person person)
+        public async Task<IActionResult> PutPerson(int id, Person person)
         {
             if (id != person.Id)
             {
@@ -87,7 +87,7 @@ namespace BTI_Project1_API.Controllers
 
         // DELETE: api/People/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePerson(Guid id)
+        public async Task<IActionResult> DeletePerson(int id)
         {
             var person = await _context.Person.FindAsync(id);
             if (person == null)
@@ -101,7 +101,7 @@ namespace BTI_Project1_API.Controllers
             return NoContent();
         }
 
-        private bool PersonExists(Guid id)
+        private bool PersonExists(int id)
         {
             return _context.Person.Any(e => e.Id == id);
         }

@@ -7,7 +7,7 @@ namespace BTI_Project1_API.Models
 {
     public class _Project
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Explanation { get; set; }
         public string GithubLink { get; set; }

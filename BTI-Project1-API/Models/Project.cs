@@ -9,7 +9,7 @@ namespace BTI_Project1_API.Models
     public class Project
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }

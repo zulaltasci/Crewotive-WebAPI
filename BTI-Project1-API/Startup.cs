@@ -30,7 +30,11 @@ namespace BTI_Project1_API
         {
 
             services.AddControllers();
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("Items"));
+            services.AddControllersWithViews();
+            services.AddDbContext<ApplicationDbContext>(opt =>
+            opt.UseSqlServer(
+                Configuration.GetConnectionString("ConnectionBerk")
+                ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +53,9 @@ namespace BTI_Project1_API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "readme",
+                    pattern: "{controller=Readme}/{action=Index}/{id?}");
             });
         }
     }
