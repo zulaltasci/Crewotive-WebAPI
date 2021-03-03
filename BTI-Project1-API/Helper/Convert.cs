@@ -1,4 +1,5 @@
-﻿using BTI_Project1_API.Context;
+﻿using BTI_Project1_API.Attributes;
+using BTI_Project1_API.Context;
 using BTI_Project1_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace BTI_Project1_API.Helper
             _Person convertedPerson = new _Person();
 
             #region Same property Content Cloning
+
             convertedPerson.Id = person.Id;
             convertedPerson.Name = person.Name;
             convertedPerson.Surname = person.Surname;
@@ -25,16 +27,16 @@ namespace BTI_Project1_API.Helper
 
             //foreach (var property in typeof(Person).GetProperties())
             //{
-            //    if(property.Name.ToString() == "ProjectIds") continue;
+            //    if (property.Name.ToString() == "ProjectIds") continue;
             //    var editedProp = property.GetValue(person);
-            //    property.SetValue(person, editedProp);
+            //    property.SetValue(convertedPerson, editedProp);
             //}
             #endregion
 
             #region Ids to Project Arrays
             List<int> ids = new List<int>();
 
-            foreach (var id in person.ProjectIds.Split('-'))
+            foreach (var id in person.ProjectIds.Split('-')) 
             {
                 ids.Add(int.Parse(id));
             }
@@ -76,9 +78,8 @@ namespace BTI_Project1_API.Helper
 
             //foreach (var property in typeof(Project).GetProperties())
             //{
-            //    if (property.Name.ToString() == "PersonIds") continue;
-            //    var editedProp = property.GetValue(project);
-            //    property.SetValue(convertedProject, editedProp);
+            //    //if (property.GetCustomAttributes(typeof(IgnoreCopy), false).Length > 0) continue;
+            //    property.SetValue(project, property.GetValue(convertedProject));
             //}
             #endregion
 
@@ -103,7 +104,6 @@ namespace BTI_Project1_API.Helper
             return convertedProject;
         }
 
-        
         public static async Task<ActionResult<IEnumerable<_Project>>> DbToProjectListAsync(ApplicationDbContext context)
         {
             List<_Project> _Projects = new List<_Project>();
@@ -114,6 +114,24 @@ namespace BTI_Project1_API.Helper
             }
 
             return _Projects;
+        }
+    
+        
+        public static async Task<Person> PersonToDbAsync(_Person _person)
+        {
+            Person person = new Person();
+
+            return person;
+        }
+
+        public static async Task<Person> PersonToDbAsync(_Person person, ApplicationDbContext context)
+        {
+            return new Person();
+        }
+
+        public static async Task<Project> ProjectToDbAsync(_Project project, ApplicationDbContext context)
+        {
+            return new Project();
         }
     }
 }

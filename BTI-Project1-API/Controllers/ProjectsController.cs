@@ -76,9 +76,9 @@ namespace BTI_Project1_API.Controllers
         // POST: api/Projects
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Project>> PostProject(Project project)
+        public async Task<ActionResult<Project>> PostProject(_Project project)
         {
-            _context.Project.Add(project);
+            _context.Project.Add(await Helper.Convert.ProjectToDbAsync(project, _context));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProject", new { id = project.Id }, project);

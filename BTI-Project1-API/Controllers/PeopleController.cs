@@ -41,6 +41,7 @@ namespace BTI_Project1_API.Controllers
             }
 
             return await Helper.Convert.DbToPersonAsync(person, _context);
+            //return person;
         }
 
         // PUT: api/People/5
@@ -77,9 +78,10 @@ namespace BTI_Project1_API.Controllers
         // POST: api/People
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(Person person)
+        public async Task<ActionResult<Person>> PostPerson(_Person person)
         {
-            _context.Person.Add(person);
+
+            _context.Person.Add(await Helper.Convert.PersonToDbAsync(person, _context));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPerson", new { id = person.Id }, person);

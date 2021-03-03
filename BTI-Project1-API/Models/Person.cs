@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTI_Project1_API.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace BTI_Project1_API.Models
         public string Role { get; set; }
         public string GithubLink { get; set; }
         public string LinkedInLink { get; set; }
+
+        [IgnoreCopy]
         public string ProjectIds { get; set; }
     }
 }
