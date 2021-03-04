@@ -45,7 +45,7 @@ namespace BTI_Project1_API.Controllers
         // PUT: api/Projects/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, Project project)
+        public async Task<IActionResult> PutProject(int id, _Project project)
         {
             if (id != project.Id)
             {
@@ -78,7 +78,7 @@ namespace BTI_Project1_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Project>> PostProject(_Project project)
         {
-            _context.Project.Add(await Helper.Convert.ProjectToDbAsync(project));
+            _context.Project.Add(Helper.Convert.ProjectToDb(project));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProject", new { id = project.Id }, project);

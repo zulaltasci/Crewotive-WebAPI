@@ -136,17 +136,57 @@ namespace BTI_Project1_API.Helper
 
             return _Projects;
         }
-    
 
-
-        public static async Task<Person> PersonToDbAsync(_Person person)
+        public static Person PersonToDb(_Person person)
         {
-            return new Person();
+            Person convertedPerson = new Person();
+
+            #region Same propert Content Cloning
+            convertedPerson = Copy.Action(person, convertedPerson);
+            #endregion
+
+            #region Project Array to Ids
+
+            List<string> ids = new List<string>();
+
+            foreach (var project in person.Projects)
+            {
+                ids.Add(project.Id.ToString());
+            }
+
+            string ProjectIds = String.Join('-', ids);
+
+            #endregion
+
+            convertedPerson.ProjectIds = ProjectIds;
+
+            return convertedPerson;
         }
 
-        public static async Task<Project> ProjectToDbAsync(_Project project)
+        public static Project ProjectToDb(_Project project)
         {
-            return new Project();
+            Project converted_Project = new Project();
+
+            #region Same property Content Cloning
+            converted_Project = Helper.Copy.Action(project, converted_Project);
+            #endregion
+
+            #region Project Arrays to Ids
+
+            List<string> ids = new List<string>();
+
+            foreach (var person in project.People)
+            {
+                ids.Add(person.Id.ToString());
+            }
+
+            string PersonIds = String.Join('-', ids);
+
+            #endregion
+
+            converted_Project.PersonIds = PersonIds;
+
+            return converted_Project;
         }
     }
 }
