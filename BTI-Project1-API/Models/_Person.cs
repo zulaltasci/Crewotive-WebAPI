@@ -8,6 +8,7 @@ namespace BTI_Project1_API.Models
 {
     public class _Person
     {
+        [IgnoreCopy]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

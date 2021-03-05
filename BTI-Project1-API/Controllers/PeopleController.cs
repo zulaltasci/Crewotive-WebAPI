@@ -80,7 +80,7 @@ namespace BTI_Project1_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Person>> PostPerson(_Person person)
         {
-            _context.Person.Add(Helper.Convert.PersonToDb(person));
+            _context.Person.Add(Helper.Convert.PersonToDb(person, _context));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPerson", new { id = person.Id }, person);

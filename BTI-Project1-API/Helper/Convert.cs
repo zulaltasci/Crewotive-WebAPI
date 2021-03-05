@@ -16,9 +16,9 @@ namespace BTI_Project1_API.Helper
         {
             _Person convertedPerson = new _Person();
 
-    #region Same property Content Cloning
+            #region Same property Content Cloning
 
-    #region Unneeded
+            #region Unneeded
 
             //convertedPerson.Id = person.Id;
             //convertedPerson.Name = person.Name;
@@ -34,17 +34,17 @@ namespace BTI_Project1_API.Helper
             //    property.SetValue(convertedPerson, editedProp);
             //}
 
-    #endregion
+            #endregion
 
             convertedPerson = Helper.Copy.Action(person, convertedPerson);
 
-    #endregion
+            #endregion
 
-    #region Ids to Project Arrays
+            #region Ids to Project Arrays
 
             List<int> ids = new List<int>();
 
-            foreach (var id in person.ProjectIds.Split('-')) 
+            foreach (var id in person.ProjectIds.Split('-'))
             {
                 ids.Add(int.Parse(id));
             }
@@ -58,7 +58,7 @@ namespace BTI_Project1_API.Helper
 
             convertedPerson.Projects = projects.ToArray();
 
-    #endregion
+            #endregion
 
             return convertedPerson;
         }
@@ -79,9 +79,9 @@ namespace BTI_Project1_API.Helper
         {
             _Project convertedProject = new _Project();
 
-    #region Same property Content Cloning
+            #region Same property Content Cloning
 
-    #region Unneeded
+            #region Unneeded
 
             //convertedProject.Id = project.Id;
             //convertedProject.Name = project.Name;
@@ -96,13 +96,13 @@ namespace BTI_Project1_API.Helper
             //    property1.SetValue(convertedProject, property.GetValue(project));
             //}
 
-    #endregion
+            #endregion
 
             convertedProject = Helper.Copy.Action(project, convertedProject);
 
-    #endregion
+            #endregion
 
-    #region Ids to Project Arrays
+            #region Ids to Project Arrays
 
             List<int> ids = new List<int>();
 
@@ -120,7 +120,7 @@ namespace BTI_Project1_API.Helper
 
             convertedProject.People = People.ToArray();
 
-    #endregion
+            #endregion
 
             return convertedProject;
         }
@@ -137,12 +137,13 @@ namespace BTI_Project1_API.Helper
             return _Projects;
         }
 
-        public static Person PersonToDb(_Person person)
+        public static Person PersonToDb(_Person person, ApplicationDbContext context)
         {
             Person convertedPerson = new Person();
 
             #region Same propert Content Cloning
             convertedPerson = Copy.Action(person, convertedPerson);
+            person.Id = context.Person.Select(i => i.Id).Max() + 1;
             #endregion
 
             #region Project Array to Ids
@@ -158,17 +159,35 @@ namespace BTI_Project1_API.Helper
 
             #endregion
 
+            #region Adding Person Id in Projects
+
+
+
+            foreach (var project in context.Project)
+            {
+                if (project.Id.ToString().Contains(ProjectIds))
+                {
+                    List<string> personIds = project.PersonIds.Split('-').ToList();
+                    personIds.Add(person.Id.ToString());
+                    personIds.Sort();
+                    project.PersonIds = String.Join('-', personIds);
+                }
+            }
+
+            #endregion
+
             convertedPerson.ProjectIds = ProjectIds;
 
             return convertedPerson;
         }
 
-        public static Project ProjectToDb(_Project project)
+        public static Project ProjectToDb(_Project project, ApplicationDbContext context)
         {
-            Project converted_Project = new Project();
+            Project convertedProject = new Project();
 
             #region Same property Content Cloning
-            converted_Project = Helper.Copy.Action(project, converted_Project);
+            convertedProject = Helper.Copy.Action(project, convertedProject);
+            project.Id = context.Project.Select(i => i.Id).Max() + 1;
             #endregion
 
             #region Project Arrays to Ids
@@ -184,9 +203,26 @@ namespace BTI_Project1_API.Helper
 
             #endregion
 
-            converted_Project.PersonIds = PersonIds;
+            #region Adding Project Id in People
 
-            return converted_Project;
+            
+
+            foreach (var person in context.Person)
+            {
+                if (person.Id.ToString().Contains(PersonIds))
+                {
+                    List<string> projectIds = person.ProjectIds.Split('-').ToList();
+                    projectIds.Add(project.Id.ToString());
+                    projectIds.Sort();
+                    person.ProjectIds = String.Join('-', projectIds);
+                }
+            }
+
+            #endregion
+
+            convertedProject.PersonIds = PersonIds;
+
+            return convertedProject;
         }
     }
 }

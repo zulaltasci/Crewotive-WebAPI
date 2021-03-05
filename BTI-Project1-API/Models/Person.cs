@@ -13,7 +13,7 @@ namespace BTI_Project1_API.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } 
 
         [Required]
         public string Surname { get; set; }

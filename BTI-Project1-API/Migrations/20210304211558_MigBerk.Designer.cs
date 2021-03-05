@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BTI_Project1_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210303165337_MigBerk")]
+    [Migration("20210304211558_MigBerk")]
     partial class MigBerk
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
