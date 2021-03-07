@@ -39,18 +39,24 @@ namespace BTI_Project1_API.Controllers
                 return NotFound();
             }
 
+            if (!project.IsActive)
+            {
+                return NotFound();
+            }
+
             return await Helper.Convert.DbToProjectAsync(project, _context); ;
         }
 
         // PUT: api/Projects/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, _Project project)
+        public async Task<IActionResult> PutProject(int id, Project project)
         {
             if (id != project.Id)
             {
                 return BadRequest();
             }
+
 
             _context.Entry(project).State = EntityState.Modified;
 
@@ -76,7 +82,7 @@ namespace BTI_Project1_API.Controllers
         // POST: api/Projects
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Project>> PostProject(_Project project)
+        public async Task<ActionResult<Project>> PostProject(Project project)
         {
             _context.Project.Add(Helper.Convert.ProjectToDb(project, _context));
             await _context.SaveChangesAsync();

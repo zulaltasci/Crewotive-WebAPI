@@ -22,6 +22,9 @@ namespace BTI_Project1_API.Models
         public string LinkedInLink { get; set; }
 
         [IgnoreCopy]
+        public bool IsActive { get; set; }
+
+        [IgnoreCopy]
         public string ProjectIds { get; set; }
     }
 }

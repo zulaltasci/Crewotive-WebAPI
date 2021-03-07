@@ -40,6 +40,11 @@ namespace BTI_Project1_API.Controllers
                 return NotFound();
             }
 
+            if (!person.IsActive)
+            {
+                return NotFound();
+            }
+
             return await Helper.Convert.DbToPersonAsync(person, _context);
             //return person;
         }
@@ -53,6 +58,8 @@ namespace BTI_Project1_API.Controllers
             {
                 return BadRequest();
             }
+
+            Helper.PutMethod.Person();
 
             _context.Entry(person).State = EntityState.Modified;
 
@@ -71,14 +78,13 @@ namespace BTI_Project1_API.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 
         // POST: api/People
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(_Person person)
+        public async Task<ActionResult<Person>> PostPerson(Person person)
         {
             _context.Person.Add(Helper.Convert.PersonToDb(person, _context));
             await _context.SaveChangesAsync();

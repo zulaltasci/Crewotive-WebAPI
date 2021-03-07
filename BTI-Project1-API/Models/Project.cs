@@ -18,6 +18,9 @@ namespace BTI_Project1_API.Models
         public string GithubLink { get; set; }
 
         [IgnoreCopy]
+        public bool IsActive { get; set; }
+
+        [IgnoreCopy]
         public string PersonIds { get; set; }
     }
 }

@@ -46,7 +46,11 @@ namespace BTI_Project1_API.Helper
 
             foreach (var id in person.ProjectIds.Split('-'))
             {
-                ids.Add(int.Parse(id));
+                try
+                {
+                    ids.Add(int.Parse(id));
+                }
+                catch (Exception) { }
             }
 
             List<Project> projects = new List<Project>();
@@ -69,6 +73,8 @@ namespace BTI_Project1_API.Helper
 
             foreach (var item in context.Person.ToList())
             {
+                if (!item.IsActive) continue;
+
                 _People.Add(await DbToPersonAsync(item, context));
             }
 
@@ -108,7 +114,11 @@ namespace BTI_Project1_API.Helper
 
             foreach (var id in project.PersonIds.Split('-'))
             {
-                ids.Add(int.Parse(id));
+                try
+                {
+                    ids.Add(int.Parse(id));
+                }
+                catch (Exception) { }
             }
 
             List<Person> People = new List<Person>();
@@ -131,85 +141,102 @@ namespace BTI_Project1_API.Helper
 
             foreach (var item in context.Project.ToList())
             {
+                if (!item.IsActive) continue;
+
                 _Projects.Add(await DbToProjectAsync(item, context));
             }
 
             return _Projects;
         }
 
-        public static Person PersonToDb(_Person person, ApplicationDbContext context)
+        public static Person PersonToDb(Person person, ApplicationDbContext context)
         {
-            Person convertedPerson = new Person();
+            //Person convertedPerson = new Person();
 
-            #region Same propert Content Cloning
-            convertedPerson = Copy.Action(person, convertedPerson);
-            person.Id = context.Person.Select(i => i.Id).Max() + 1;
-            #endregion
+            #region Finding Person Id
 
-            #region Project Array to Ids
-
-            List<string> ids = new List<string>();
-
-            foreach (var project in person.Projects)
+            string tempId;
+            try
             {
-                ids.Add(project.Id.ToString());
+                tempId = (context.Person.Select(i => i.Id).Max() + 1).ToString();
+            }
+            catch (Exception)
+            {
+                tempId = "1";
             }
 
-            string ProjectIds = String.Join('-', ids);
+            #endregion
 
+            #region UNNEEDED
+            #region Project Array to Ids
+
+            //List<string> ids = new List<string>();
+
+            //foreach (var project in person.Projects)
+            //{
+            //    ids.Add(project.Id.ToString());
+            //}
+
+            //string ProjectIds = ids.Count == 1 ? ids[0] : String.Join('-', ids);
+
+            #endregion
             #endregion
 
             #region Adding Person Id in Projects
 
-
-
             foreach (var project in context.Project)
             {
-                if (project.Id.ToString().Contains(ProjectIds))
+                if (project.Id.ToString().Contains(person.ProjectIds))
                 {
                     List<string> personIds = project.PersonIds.Split('-').ToList();
-                    personIds.Add(person.Id.ToString());
+                    personIds.Add(tempId);
                     personIds.Sort();
-                    project.PersonIds = String.Join('-', personIds);
+                    project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
                 }
             }
 
             #endregion
 
-            convertedPerson.ProjectIds = ProjectIds;
-
-            return convertedPerson;
+            return person;
         }
 
-        public static Project ProjectToDb(_Project project, ApplicationDbContext context)
+        public static Project ProjectToDb(Project project, ApplicationDbContext context)
         {
-            Project convertedProject = new Project();
+            //Project convertedProject = new Project();
 
-            #region Same property Content Cloning
-            convertedProject = Helper.Copy.Action(project, convertedProject);
-            project.Id = context.Project.Select(i => i.Id).Max() + 1;
+            #region Finding Project Id
+
+            string tempId;
+            try
+            {
+                tempId = (context.Project.Select(i => i.Id).Max() + 1).ToString();
+            }
+            catch(Exception)
+            {
+                tempId = "1";
+            }
             #endregion
 
+            #region UNNEEDED
             #region Project Arrays to Ids
 
-            List<string> ids = new List<string>();
+            //List<string> ids = new List<string>();
 
-            foreach (var person in project.People)
-            {
-                ids.Add(person.Id.ToString());
-            }
+            //foreach (var person in project.People)
+            //{
+            //    ids.Add(person.Id.ToString());
+            //}
 
-            string PersonIds = String.Join('-', ids);
+            //string PersonIds = String.Join('-', ids);
 
+            #endregion
             #endregion
 
             #region Adding Project Id in People
 
-            
-
             foreach (var person in context.Person)
             {
-                if (person.Id.ToString().Contains(PersonIds))
+                if (person.Id.ToString().Contains(project.PersonIds))
                 {
                     List<string> projectIds = person.ProjectIds.Split('-').ToList();
                     projectIds.Add(project.Id.ToString());
@@ -220,9 +247,7 @@ namespace BTI_Project1_API.Helper
 
             #endregion
 
-            convertedProject.PersonIds = PersonIds;
-
-            return convertedProject;
+            return project;
         }
     }
 }
