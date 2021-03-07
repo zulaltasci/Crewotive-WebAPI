@@ -28,6 +28,9 @@ namespace BTI_Project1_API.Migrations
                     b.Property<string>("GithubLink")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LinkedInLink")
                         .HasColumnType("nvarchar(max)");
 
@@ -62,6 +65,9 @@ namespace BTI_Project1_API.Migrations
 
                     b.Property<string>("GithubLink")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

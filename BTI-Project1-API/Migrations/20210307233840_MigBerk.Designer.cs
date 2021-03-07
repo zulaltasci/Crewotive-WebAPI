@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BTI_Project1_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210304211558_MigBerk")]
+    [Migration("20210307233840_MigBerk")]
     partial class MigBerk
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,9 @@ namespace BTI_Project1_API.Migrations
 
                     b.Property<string>("GithubLink")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LinkedInLink")
                         .HasColumnType("nvarchar(max)");
@@ -64,6 +67,9 @@ namespace BTI_Project1_API.Migrations
 
                     b.Property<string>("GithubLink")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

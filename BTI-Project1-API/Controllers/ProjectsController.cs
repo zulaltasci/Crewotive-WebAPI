@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BTI_Project1_API.Context;
 using BTI_Project1_API.Models;
+using BTI_Project1_API.Attributes;
 
 namespace BTI_Project1_API.Controllers
 {
@@ -28,6 +29,13 @@ namespace BTI_Project1_API.Controllers
             return await Helper.Convert.DbToProjectListAsync(_context);
         }
 
+        // GET: api/Projects/all
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<_Project>>> GetAllProject()
+        {
+            return await Helper.Convert.DbToProjectListAsync(_context, true);
+        }
+
         // GET: api/Projects/5
         [HttpGet("{id}")]
         public async Task<ActionResult<_Project>> GetProject(int id)
@@ -44,7 +52,7 @@ namespace BTI_Project1_API.Controllers
                 return NotFound();
             }
 
-            return await Helper.Convert.DbToProjectAsync(project, _context); ;
+            return await Helper.Convert.DbToProjectAsync(project, _context);
         }
 
         // PUT: api/Projects/5
@@ -57,6 +65,7 @@ namespace BTI_Project1_API.Controllers
                 return BadRequest();
             }
 
+            Helper.PutMethod.Project(_context, project);
 
             _context.Entry(project).State = EntityState.Modified;
 
@@ -95,12 +104,26 @@ namespace BTI_Project1_API.Controllers
         public async Task<IActionResult> DeleteProject(int id)
         {
             var project = await _context.Project.FindAsync(id);
+
             if (project == null)
             {
                 return NotFound();
             }
 
-            _context.Project.Remove(project);
+            foreach (var person in _context.Person)
+            {
+                if (project.Id.ToString().Contains(person.ProjectIds))
+                {
+                    List<string> projectIds = person.ProjectIds.Split('-').ToList();
+                    projectIds.Remove(project.Id.ToString());
+                    person.ProjectIds = projectIds.Count == 1 ? projectIds[0] : String.Join('-', projectIds);
+                }
+            }
+
+            project.IsActive = false;
+
+            _context.Entry(project).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
 
             return NoContent();

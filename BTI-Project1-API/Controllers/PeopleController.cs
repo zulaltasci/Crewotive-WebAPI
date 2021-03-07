@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BTI_Project1_API.Context;
 using BTI_Project1_API.Models;
 using BTI_Project1_API.Helper;
+using BTI_Project1_API.Attributes;
 
 namespace BTI_Project1_API.Controllers
 {
@@ -27,6 +28,13 @@ namespace BTI_Project1_API.Controllers
         public async Task<ActionResult<IEnumerable<_Person>>> GetPerson()
         {
             return await Helper.Convert.DbToPersonListAsync(_context);
+        }
+
+        // GET: api/People/all
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<_Person>>> GetAllPerson()
+        {
+            return await Helper.Convert.DbToPersonListAsync(_context, true);
         }
 
         // GET: api/People/5
@@ -59,7 +67,7 @@ namespace BTI_Project1_API.Controllers
                 return BadRequest();
             }
 
-            Helper.PutMethod.Person();
+            Helper.PutMethod.Person(_context, person);
 
             _context.Entry(person).State = EntityState.Modified;
 
@@ -102,7 +110,17 @@ namespace BTI_Project1_API.Controllers
                 return NotFound();
             }
 
-            _context.Person.Remove(person);
+            foreach (var project in _context.Project)
+            {
+                if (person.Id.ToString().Contains(project.PersonIds))
+                {
+                    List<string> personIds = project.PersonIds.Split('-').ToList();
+                    personIds.Remove(person.Id.ToString());
+                    project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
+                }
+            }
+            person.IsActive = false;
+            _context.Entry(person).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return NoContent();

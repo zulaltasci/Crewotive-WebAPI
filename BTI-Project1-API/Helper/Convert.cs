@@ -1,11 +1,13 @@
 ﻿using BTI_Project1_API.Attributes;
 using BTI_Project1_API.Context;
+using BTI_Project1_API.Controllers;
 using BTI_Project1_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace BTI_Project1_API.Helper
@@ -67,13 +69,13 @@ namespace BTI_Project1_API.Helper
             return convertedPerson;
         }
 
-        public static async Task<ActionResult<IEnumerable<_Person>>> DbToPersonListAsync(ApplicationDbContext context)
+        public static async Task<ActionResult<IEnumerable<_Person>>> DbToPersonListAsync(ApplicationDbContext context, bool IsAll = false)
         {
             List<_Person> _People = new List<_Person>();
 
             foreach (var item in context.Person.ToList())
             {
-                if (!item.IsActive) continue;
+                if (!IsAll && !item.IsActive) continue;
 
                 _People.Add(await DbToPersonAsync(item, context));
             }
@@ -112,14 +114,17 @@ namespace BTI_Project1_API.Helper
 
             List<int> ids = new List<int>();
 
-            foreach (var id in project.PersonIds.Split('-'))
+            try
             {
-                try
+                foreach (var id in project.PersonIds.Split('-'))
                 {
-                    ids.Add(int.Parse(id));
+                    try
+                    {
+                        ids.Add(int.Parse(id));
+                    }
+                    catch (Exception) { }
                 }
-                catch (Exception) { }
-            }
+            }catch(Exception) { }
 
             List<Person> People = new List<Person>();
 
@@ -135,13 +140,13 @@ namespace BTI_Project1_API.Helper
             return convertedProject;
         }
 
-        public static async Task<ActionResult<IEnumerable<_Project>>> DbToProjectListAsync(ApplicationDbContext context)
+        public static async Task<ActionResult<IEnumerable<_Project>>> DbToProjectListAsync(ApplicationDbContext context, bool IsAll = false)
         {
             List<_Project> _Projects = new List<_Project>();
 
             foreach (var item in context.Project.ToList())
             {
-                if (!item.IsActive) continue;
+                if (!IsAll && !item.IsActive) continue;
 
                 _Projects.Add(await DbToProjectAsync(item, context));
             }
@@ -152,6 +157,8 @@ namespace BTI_Project1_API.Helper
         public static Person PersonToDb(Person person, ApplicationDbContext context)
         {
             //Person convertedPerson = new Person();
+
+            person.IsActive = true;
 
             #region Finding Person Id
 
@@ -186,7 +193,7 @@ namespace BTI_Project1_API.Helper
 
             foreach (var project in context.Project)
             {
-                if (project.Id.ToString().Contains(person.ProjectIds))
+                if (person.ProjectIds.Contains(project.Id.ToString()))
                 {
                     List<string> personIds = project.PersonIds.Split('-').ToList();
                     personIds.Add(tempId);
@@ -203,6 +210,8 @@ namespace BTI_Project1_API.Helper
         public static Project ProjectToDb(Project project, ApplicationDbContext context)
         {
             //Project convertedProject = new Project();
+
+            project.IsActive = true;
 
             #region Finding Project Id
 
@@ -236,12 +245,12 @@ namespace BTI_Project1_API.Helper
 
             foreach (var person in context.Person)
             {
-                if (person.Id.ToString().Contains(project.PersonIds))
+                if (project.PersonIds.Contains(person.Id.ToString()))
                 {
                     List<string> projectIds = person.ProjectIds.Split('-').ToList();
-                    projectIds.Add(project.Id.ToString());
+                    projectIds.Add(tempId);
                     projectIds.Sort();
-                    person.ProjectIds = String.Join('-', projectIds);
+                    person.ProjectIds = projectIds.Count == 1 ? projectIds[0] : String.Join('-', projectIds);
                 }
             }
 

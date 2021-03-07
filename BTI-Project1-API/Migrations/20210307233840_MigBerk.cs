@@ -17,6 +17,7 @@ namespace BTI_Project1_API.Migrations
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GithubLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LinkedInLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     ProjectIds = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -33,6 +34,7 @@ namespace BTI_Project1_API.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Explanation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GithubLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     PersonIds = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
