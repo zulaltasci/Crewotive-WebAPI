@@ -46,14 +46,18 @@ namespace BTI_Project1_API.Helper
 
             List<int> ids = new List<int>();
 
-            foreach (var id in person.ProjectIds.Split('-'))
+            try
             {
-                try
+                foreach (var id in person.ProjectIds.Split('-'))
                 {
-                    ids.Add(int.Parse(id));
+                    try
+                    {
+                        ids.Add(int.Parse(id));
+                    }
+                    catch (Exception) { }
                 }
-                catch (Exception) { }
-            }
+            } 
+            catch (ArgumentNullException) { }
 
             List<Project> projects = new List<Project>();
 
@@ -195,7 +199,7 @@ namespace BTI_Project1_API.Helper
             {
                 if (person.ProjectIds.Contains(project.Id.ToString()))
                 {
-                    List<string> personIds = project.PersonIds.Split('-').ToList();
+                    List<string> personIds = project.PersonIds.Length == 0 ? new List<string>() : project.PersonIds.Split('-').ToList();
                     personIds.Add(tempId);
                     personIds.Sort();
                     project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
@@ -247,7 +251,7 @@ namespace BTI_Project1_API.Helper
             {
                 if (project.PersonIds.Contains(person.Id.ToString()))
                 {
-                    List<string> projectIds = person.ProjectIds.Split('-').ToList();
+                    List<string> projectIds = person.ProjectIds.Length == 0 ? new List<string>() : person.ProjectIds.Split('-').ToList();
                     projectIds.Add(tempId);
                     projectIds.Sort();
                     person.ProjectIds = projectIds.Count == 1 ? projectIds[0] : String.Join('-', projectIds);

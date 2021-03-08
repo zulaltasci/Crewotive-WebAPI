@@ -67,7 +67,12 @@ namespace BTI_Project1_API.Controllers
 
             Helper.PutMethod.Project(_context, project);
 
-            _context.Entry(project).State = EntityState.Modified;
+            Project dbproject = _context.Project.Find(project.Id);
+
+            Helper.Copy.Action(project, dbproject);
+
+            dbproject.PersonIds = project.PersonIds;
+            dbproject.IsActive = project.IsActive;
 
             try
             {
@@ -85,7 +90,8 @@ namespace BTI_Project1_API.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetProject", new { id = project.Id }, project);
+            //return NoContent();
         }
 
         // POST: api/Projects
@@ -110,15 +116,15 @@ namespace BTI_Project1_API.Controllers
                 return NotFound();
             }
 
-            foreach (var person in _context.Person)
-            {
-                if (project.Id.ToString().Contains(person.ProjectIds))
-                {
-                    List<string> projectIds = person.ProjectIds.Split('-').ToList();
-                    projectIds.Remove(project.Id.ToString());
-                    person.ProjectIds = projectIds.Count == 1 ? projectIds[0] : String.Join('-', projectIds);
-                }
-            }
+            //foreach (var person in _context.Person)
+            //{
+            //    if (project.Id.ToString().Contains(person.ProjectIds))
+            //    {
+            //        List<string> projectIds = person.ProjectIds.Split('-').ToList();
+            //        projectIds.Remove(project.Id.ToString());
+            //        person.ProjectIds = projectIds.Count == 1 ? projectIds[0] : String.Join('-', projectIds);
+            //    }
+            //}
 
             project.IsActive = false;
 

@@ -69,7 +69,12 @@ namespace BTI_Project1_API.Controllers
 
             Helper.PutMethod.Person(_context, person);
 
-            _context.Entry(person).State = EntityState.Modified;
+            Person dbperson = await _context.Person.FindAsync(id);
+
+            Helper.Copy.Action(person, dbperson);
+
+            dbperson.ProjectIds = person.ProjectIds;
+            dbperson.IsActive = person.IsActive;
 
             try
             {
@@ -86,7 +91,8 @@ namespace BTI_Project1_API.Controllers
                     throw;
                 }
             }
-            return NoContent();
+            return CreatedAtAction("GetPerson", new { id = person.Id }, await Helper.Convert.DbToPersonAsync(person, _context));
+            //return NoContent();
         }
 
         // POST: api/People
@@ -110,15 +116,15 @@ namespace BTI_Project1_API.Controllers
                 return NotFound();
             }
 
-            foreach (var project in _context.Project)
-            {
-                if (person.Id.ToString().Contains(project.PersonIds))
-                {
-                    List<string> personIds = project.PersonIds.Split('-').ToList();
-                    personIds.Remove(person.Id.ToString());
-                    project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
-                }
-            }
+            //foreach (var project in _context.Project)
+            //{
+            //    if (person.Id.ToString().Contains(project.PersonIds))
+            //    {
+            //        List<string> personIds = project.PersonIds.Split('-').ToList();
+            //        personIds.Remove(person.Id.ToString());
+            //        project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
+            //    }
+            //}
             person.IsActive = false;
             _context.Entry(person).State = EntityState.Modified;
             await _context.SaveChangesAsync();

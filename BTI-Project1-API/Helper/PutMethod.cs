@@ -9,9 +9,23 @@ namespace BTI_Project1_API.Helper
 {
     public static class PutMethod
     {
-        public static async void Person(ApplicationDbContext context, Person person)
+        public static void Person(ApplicationDbContext context, Person person)
         {
-            var oldPerson = await context.Person.FindAsync(person.Id);
+            //Person oldPerson = context.Person.Find(person.Id);
+
+            Person oldPerson = new Person();
+
+            foreach (var dbperson in context.Person)
+            {
+                if (dbperson.Id == person.Id)
+                {
+                    oldPerson = dbperson;
+                    break;
+                }
+            }
+
+            if (oldPerson == null)
+                return;
 
             if (oldPerson.ProjectIds.Equals(person.ProjectIds))
                 return;
@@ -21,13 +35,13 @@ namespace BTI_Project1_API.Helper
 
             foreach (var projectid in oldPerson.ProjectIds.Split('-'))
             {
-                if (!projectid.Contains(person.ProjectIds))
+                if (person.ProjectIds.IndexOf(projectid) == -1)
                     removed.Add(projectid);
             }
 
             foreach (var projectid in person.ProjectIds.Split('-'))
             {
-                if (!projectid.Contains(oldPerson.ProjectIds))
+                if (oldPerson.ProjectIds.IndexOf(projectid) == -1)
                     added.Add(projectid);
             }
 
@@ -56,9 +70,23 @@ namespace BTI_Project1_API.Helper
             }
         }
 
-        public static async void Project(ApplicationDbContext context, Project project)
+        public static void Project(ApplicationDbContext context, Project project)
         {
-            var oldProject = await context.Project.FindAsync(project.Id);
+            //var oldProject = await context.Project.FindAsync(project.Id);
+
+            Project oldProject = new Project();
+
+            foreach (var dbproject in context.Project)
+            {
+                if (dbproject.Id == project.Id)
+                {
+                    oldProject = dbproject;
+                    break;
+                }
+            }
+
+            if (oldProject == null)
+                return;
 
             if (oldProject.PersonIds.Equals(project.PersonIds))
                 return;
@@ -68,13 +96,13 @@ namespace BTI_Project1_API.Helper
 
             foreach (var personid in oldProject.PersonIds.Split('-'))
             {
-                if (!personid.Contains(project.PersonIds))
+                if (project.PersonIds.IndexOf(personid) == -1)
                     removed.Add(personid);
             }
 
             foreach (var personid in project.PersonIds.Split('-'))
             {
-                if (!personid.Contains(oldProject.PersonIds))
+                if (oldProject.PersonIds.IndexOf(personid) == -1)
                     added.Add(personid);
             }
 
