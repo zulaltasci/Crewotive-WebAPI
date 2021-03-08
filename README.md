@@ -5,7 +5,7 @@ Readme
 * * * * *
 * * * * *
 
-# Person İçin
+<center>Centered text# Person İçin</center>
 
 
 * * * * *
