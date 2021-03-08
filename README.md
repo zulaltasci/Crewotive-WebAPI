@@ -69,9 +69,11 @@ Readme
 
 
 * * * * *
+<br><br>
 
 # Project İçin
 
+* * * * *
 <br>
 
 ### Get İşlemleri
@@ -131,9 +133,11 @@ Readme
 
 
 * * * * *
+<br><br>
 
 # Login
 
+* * * * *
 <br>
 
 ### Login İşlemi
