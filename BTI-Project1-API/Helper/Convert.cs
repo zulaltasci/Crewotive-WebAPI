@@ -134,7 +134,11 @@ namespace BTI_Project1_API.Helper
 
             foreach (var id in ids)
             {
-                People.Add(await context.Person.FindAsync(id));
+                Person tempPerson = await context.Person.FindAsync(id);
+
+                tempPerson.Password = "******";
+
+                People.Add(tempPerson);
             }
 
             convertedProject.People = People.ToArray();

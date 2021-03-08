@@ -13,6 +13,13 @@ namespace BTI_Project1_API.Models
         public int Id { get; set; }
 
         [Required]
+        public string UserName { get; set; }
+
+        [IgnoreCopy]
+        [Required]
+        public string Password { get; set; } 
+
+        [Required]
         public string Name { get; set; } 
 
         [Required]
