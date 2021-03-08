@@ -5,6 +5,8 @@ Readme
 * * * * *
 * * * * *
 
+<br>
+
 # <p align="center">Person İçin</p>
 
 
@@ -71,7 +73,7 @@ Readme
 * * * * *
 <br><br>
 
-# Project İçin
+# <p align="center">Project İçin</p>
 
 * * * * *
 <br>
@@ -135,7 +137,7 @@ Readme
 * * * * *
 <br><br>
 
-# Login
+# <p align="center">Login</p>
 
 * * * * *
 <br>
