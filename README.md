@@ -7,19 +7,23 @@ Readme
 
 # Person İçin
 
+
+* * * * *
+
 ### Get İşlemleri
 
 * * * * *
 
 * * * * *
 
- 
-
 **Active olan bütün Person ları get etmek için =\>** https://{hostname}/api/People
 
 **Passive de dahil bütün Person ları get etmek için =\>** https://{hostname}/api/People/all
 
 **İstenen Id ye sahip Person u get etmek için =\>** https://{hostname}/api/People/{id}
+ 
+
+
 
 * * * * *
 
@@ -29,9 +33,9 @@ Readme
 
 * * * * *
 
- 
-
 **Post etmek için =\>** https://{hostname}/api/People
+
+
 
 * * * * *
 
@@ -41,9 +45,9 @@ Readme
 
 * * * * *
 
- 
+**Put etmek için =\>** https://{hostname}/api/People/{id} 
 
-**Put etmek için =\>** https://{hostname}/api/People/{id}
+
 
 * * * * *
 
@@ -53,9 +57,9 @@ Readme
 
 * * * * *
 
- 
+**Delete etmek için =\>** https://{hostname}/api/People/{id} 
 
-**Delete etmek için =\>** https://{hostname}/api/People/{id}
+
 
 * * * * *
 
@@ -67,13 +71,13 @@ Readme
 
 * * * * *
 
- 
-
 **Active olan bütün Project leri get etmek için =\>** https://{hostname}/api/Projects
 
 **Passive de dahil bütün Project leri get etmek için =\>** https://{hostname}/api/Projects/all
 
-**İstenen Id ye sahip Project i get etmek için =\>** https://{hostname}/api/Projects/{id}
+**İstenen Id ye sahip Project i get etmek için =\>** https://{hostname}/api/Projects/{id} 
+
+
 
 * * * * *
 
@@ -83,9 +87,9 @@ Readme
 
 * * * * *
 
- 
+**Post etmek için =\>** https://{hostname}/api/Projects 
 
-**Post etmek için =\>** https://{hostname}/api/Projects
+
 
 * * * * *
 
@@ -95,9 +99,9 @@ Readme
 
 * * * * *
 
- 
+**Put etmek için =\>** https://{hostname}/api/Projects/{id} 
 
-**Put etmek için =\>** https://{hostname}/api/Projects/{id}
+
 
 * * * * *
 
@@ -107,9 +111,9 @@ Readme
 
 * * * * *
 
- 
+**Delete etmek için =\>** https://{hostname}/api/Projects/{id} 
 
-**Delete etmek için =\>** https://{hostname}/api/Projects/{id}
+
 
 * * * * *
 
@@ -121,11 +125,11 @@ Readme
 
 * * * * *
 
- 
-
 Login için url e kullanıcı adı ve şifre gönderilerek get isteğinde bulunulur.
 
-**Url =\>** https://{hostname}/api/Login
+**Url =\>** https://{hostname}/api/Login 
+
+
 
 * * * * *
 
