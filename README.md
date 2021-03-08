@@ -5,7 +5,7 @@ Readme
 * * * * *
 * * * * *
 
-<center>Person İçin</center>
+<p align="center">Person İçin</p>
 
 
 * * * * *
