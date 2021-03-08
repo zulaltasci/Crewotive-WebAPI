@@ -3,9 +3,9 @@ Readme
 
 * * * * *
 
-### Person İçin
+# Person İçin
 
-##### Get İşlemleri
+### Get İşlemleri
 
 * * * * *
 
