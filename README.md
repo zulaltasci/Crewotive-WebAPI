@@ -28,7 +28,9 @@ Readme
 
 * * * * *
 
-##### Post İşlemi
+<br>
+
+### Post İşlemi
 
 * * * * *
 
@@ -40,7 +42,9 @@ Readme
 
 * * * * *
 
-##### Put İşlemi
+<br>
+
+### Put İşlemi
 
 * * * * *
 
@@ -52,7 +56,9 @@ Readme
 
 * * * * *
 
-##### Delete İşlemi
+<br>
+
+### Delete İşlemi
 
 * * * * *
 
@@ -64,9 +70,11 @@ Readme
 
 * * * * *
 
-### Project İçin
+# Project İçin
 
-##### Get İşlemleri
+<br>
+
+### Get İşlemleri
 
 * * * * *
 
@@ -82,7 +90,9 @@ Readme
 
 * * * * *
 
-##### Post İşlemi
+<br>
+
+### Post İşlemi
 
 * * * * *
 
@@ -94,7 +104,9 @@ Readme
 
 * * * * *
 
-##### Put İşlemi
+<br>
+
+### Put İşlemi
 
 * * * * *
 
@@ -106,7 +118,9 @@ Readme
 
 * * * * *
 
-##### Delete İşlemi
+<br>
+
+### Delete İşlemi
 
 * * * * *
 
@@ -118,9 +132,11 @@ Readme
 
 * * * * *
 
-### Login
+# Login
 
-##### Login İşlemi
+<br>
+
+### Login İşlemi
 
 * * * * *
 
