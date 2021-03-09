@@ -95,6 +95,54 @@ namespace BTI_Project1_API.Controllers
             //return NoContent();
         }
 
+        // PUT: api/People/pass
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("pass/{id}")]
+        public async Task<ActionResult<bool>> ChangePassword(int id, PasswordStruct passwordStruct)
+        {
+            Person person = await _context.Person.FindAsync(id);
+
+            int DbId = 0;
+
+            foreach (var tempperson in _context.Person)
+            {
+                if (tempperson.UserName.Equals(passwordStruct.username))
+                {
+                    DbId = tempperson.Id;
+                }
+            }
+
+            if (!person.Password.Equals(passwordStruct.oldPassword))
+            {
+                return false;
+            }
+
+            if(DbId != id)
+            {
+                return false;
+            }
+
+            person.Password = passwordStruct.newPassword;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                if (!PersonExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
         // POST: api/People
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -135,6 +183,14 @@ namespace BTI_Project1_API.Controllers
         private bool PersonExists(int id)
         {
             return _context.Person.Any(e => e.Id == id);
+        }
+
+
+        public struct PasswordStruct
+        {
+            public string username { get; set; }
+            public string oldPassword { get; set; }
+            public string newPassword { get; set; }
         }
     }
 }

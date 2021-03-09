@@ -12,7 +12,6 @@ namespace BTI_Project1_API.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
         public string Explanation { get; set; }
         public string GithubLink { get; set; }

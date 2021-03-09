@@ -3,7 +3,6 @@ using BTI_Project1_API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BTI_Project1_API.Helper
 {
@@ -94,16 +93,30 @@ namespace BTI_Project1_API.Helper
             List<string> removed = new List<string>();
             List<string> added = new List<string>();
 
-            foreach (var personid in oldProject.PersonIds.Split('-'))
+            try
             {
-                if (project.PersonIds.IndexOf(personid) == -1)
-                    removed.Add(personid);
+                foreach (var personid in oldProject.PersonIds.Split('-'))
+                {
+                    if (project.PersonIds?.IndexOf(personid) == -1)
+                        removed.Add(personid);
+                }
+            }
+            catch (NullReferenceException)
+            {
+
             }
 
-            foreach (var personid in project.PersonIds.Split('-'))
+            try
             {
-                if (oldProject.PersonIds.IndexOf(personid) == -1)
-                    added.Add(personid);
+                foreach (var personid in project.PersonIds.Split('-'))
+                {
+                    if (oldProject.PersonIds?.IndexOf(personid) == -1)
+                        added.Add(personid);
+                }
+            }
+            catch (NullReferenceException)
+            {
+                
             }
 
             foreach (var person in context.Person)
