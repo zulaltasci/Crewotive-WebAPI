@@ -137,7 +137,7 @@ Readme
 * * * * *
 <br><br>
 
-# <p align="center">Login</p>
+# <p align="center">Admin Paneli</p>
 
 * * * * *
 <br>
@@ -152,8 +152,17 @@ Login için url e kullanıcı adı ve şifre gönderilerek get isteğinde bulunu
 
 **Url =\>** https://{hostname}/api/Login 
 
+* * * * *
+<br>
 
+### Parola Değiştirme İşlemi
 
 * * * * *
 
+* * * * *
 
+Şifre değiştirme işlemi için url e kullanıcı adı, eski şifre ve yeni şifre gönderilerek put isteğinde bulunulur. İşlem başarılı olursa true döner.
+
+**Url =\>** https://{hostname}/api/People/pass/{id}
+
+* * * * *
