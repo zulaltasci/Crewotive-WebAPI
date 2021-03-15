@@ -56,8 +56,8 @@ Readme
         ]
     }
 ```
-<br>*"projectids" i "1-2" olan bir person un get edildiğindeki çıktısı.*
-<br>*Daha önce silinmiş olan bir proje varsa ve kişi o projede yer alıyorsa, ilgili projenin bilgileri de person get edildiğinde çıktıda yer alır. Projenin kalkmış olduğu da belirtilir.*
+> <br>*"projectids" i "1-2" olan bir person un get edildiğindeki çıktısı.*
+> <br><br>*Daha önce silinmiş olan bir proje varsa ve kişi o projede yer alıyorsa, ilgili projenin bilgileri de person get edildiğinde çıktıda yer alır. Projenin kalkmış olduğu da belirtilir.*
 
 <br><br>
 
@@ -83,8 +83,8 @@ Readme
     "projectids": ""
 }
 ```
-<br>*"projectids" eklenecek proje id lerine göre "1-2-3" şeklinde doldurulur. *
-<br>*Herhangi bir proje eklenmemişse boş gönderilir.*
+> <br>*"projectids" eklenecek proje id lerine göre "1-2-3" şeklinde doldurulur. *
+> <br><br>*Herhangi bir proje eklenmemişse boş gönderilir.*
 
 <br><br>
 
@@ -110,8 +110,8 @@ Readme
     "projectids": "1-2"
 }
 ```
-*Put edilirken değiştirilen veya değiştirilmeyen tüm bilgiler apiye gönderilir.*
-<br>*Burada 2 adet proje olduğu varsayılıp bu kişide "projectids" düzenlemesi yapılmıştır.*
+> <br>*Put edilirken değiştirilen veya değiştirilmeyen tüm bilgiler apiye gönderilir.*
+> <br><br>*Burada 2 adet proje olduğu varsayılıp bu kişide "projectids" düzenlemesi yapılmıştır.*
 
 
 <br><br>
@@ -172,7 +172,7 @@ Readme
         ]
     }
 ```
-<br>*"personids" i "1" olan bir project in get edildiğindeki çıktısı.*
+> <br>*"personids" i "1" olan bir project in get edildiğindeki çıktısı.*
 
 <br><br>
 
@@ -194,9 +194,9 @@ Readme
     "personids": "1-2-3"
 }
 ```
-<br>*"personids" eklenecek person id lerine göre "1-2-3" şeklinde doldurulur. *
-<br>*Herhangi bir person eklenmemişse boş gönderilir.*
-<br>*Burada 3 adet person olduğu varsayılıp eklemesi yapılmıştır.*
+> <br>*"personids" eklenecek person id lerine göre "1-2-3" şeklinde doldurulur. *
+> <br><br>*Herhangi bir person eklenmemişse boş gönderilir.*
+> <br><br>*Burada 3 adet person olduğu varsayılıp eklemesi yapılmıştır.*
 
 
 <br><br>
@@ -220,8 +220,8 @@ Readme
     "personids": "1-3"
 }
 ```
-<br>*Put edilirken değiştirilen veya değiştirilmeyen tüm bilgiler apiye gönderilir.*
-<br>*Burada put edilirken "2" numaralı person projeden silinmiştir.*
+> <br>*Put edilirken değiştirilen veya değiştirilmeyen tüm bilgiler apiye gönderilir.*
+> <br><br>*Burada put edilirken "2" numaralı person projeden silinmiştir.*
 
 <br><br>
 
@@ -261,8 +261,8 @@ Login için url e kullanıcı adı ve şifre gönderilerek get isteğinde bulunu
     "password": "123456"
 }
 ```
-<br>*Apiye bu bilgilerle get isteği gönderilir. Kullanıcı adı ve şifre eşleşir ise true, eşleşmez ise false döner.*
-<br>*Diğer durumlarda (username null olması, db de olmaması gibi) "BadRequest" döner.*
+> <br>*Apiye bu bilgilerle get isteği gönderilir. Kullanıcı adı ve şifre eşleşir ise true, eşleşmez ise false döner.*
+> <br><br>*Diğer durumlarda (username null olması, db de olmaması gibi) "BadRequest" döner.*
 
 
 <br><br>
@@ -286,5 +286,5 @@ Login için url e kullanıcı adı ve şifre gönderilerek get isteğinde bulunu
     "newpassword": "12345678"
 }
 ```
-<br>*Kullanıcı adı ve parola eşleşmesi başarılı olursa şifre değiştirilir ve true döner.*
-<br>*Diğer durumlarda false döner.*
+> <br>*Kullanıcı adı ve parola eşleşmesi başarılı olursa şifre değiştirilir ve true döner.*
+> <br><br>*Diğer durumlarda false döner.*
