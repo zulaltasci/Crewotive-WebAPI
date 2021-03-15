@@ -32,17 +32,23 @@ namespace BTI_Project1_API.Helper
             List<string> removed = new List<string>();
             List<string> added = new List<string>();
 
-            foreach (var projectid in oldPerson.ProjectIds.Split('-'))
+            try
             {
-                if (person.ProjectIds.IndexOf(projectid) == -1)
-                    removed.Add(projectid);
-            }
+                foreach (var projectid in oldPerson.ProjectIds.Split('-'))
+                {
+                    if (person.ProjectIds.IndexOf(projectid) == -1)
+                        removed.Add(projectid);
+                }
+            }catch(NullReferenceException) { }
 
-            foreach (var projectid in person.ProjectIds.Split('-'))
+            try
             {
-                if (oldPerson.ProjectIds.IndexOf(projectid) == -1)
-                    added.Add(projectid);
-            }
+                foreach (var projectid in person.ProjectIds.Split('-'))
+                {
+                    if (oldPerson.ProjectIds.IndexOf(projectid) == -1)
+                        added.Add(projectid);
+                }
+            }catch(NullReferenceException) { }
 
             foreach (var project in context.Project)
             {
@@ -100,11 +106,7 @@ namespace BTI_Project1_API.Helper
                     if (project.PersonIds?.IndexOf(personid) == -1)
                         removed.Add(personid);
                 }
-            }
-            catch (NullReferenceException)
-            {
-
-            }
+            }catch(NullReferenceException) { }
 
             try
             {
@@ -113,11 +115,7 @@ namespace BTI_Project1_API.Helper
                     if (oldProject.PersonIds?.IndexOf(personid) == -1)
                         added.Add(personid);
                 }
-            }
-            catch (NullReferenceException)
-            {
-                
-            }
+            }catch(NullReferenceException) { }
 
             foreach (var person in context.Person)
             {

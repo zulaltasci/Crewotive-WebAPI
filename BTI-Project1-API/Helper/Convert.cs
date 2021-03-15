@@ -199,16 +199,19 @@ namespace BTI_Project1_API.Helper
 
             #region Adding Person Id in Projects
 
-            foreach (var project in context.Project)
+            try
             {
-                if (person.ProjectIds.Contains(project.Id.ToString()))
+                foreach (var project in context.Project)
                 {
-                    List<string> personIds = project.PersonIds.Length == 0 ? new List<string>() : project.PersonIds.Split('-').ToList();
-                    personIds.Add(tempId);
-                    personIds.Sort();
-                    project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
+                    if (person.ProjectIds.Contains(project.Id.ToString()))
+                    {
+                        List<string> personIds = project.PersonIds.Length == 0 ? new List<string>() : project.PersonIds.Split('-').ToList();
+                        personIds.Add(tempId);
+                        personIds.Sort();
+                        project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
+                    }
                 }
-            }
+            }catch(Exception) { }
 
             #endregion
 
@@ -251,16 +254,19 @@ namespace BTI_Project1_API.Helper
 
             #region Adding Project Id in People
 
-            foreach (var person in context.Person)
+            try
             {
-                if (project.PersonIds.Contains(person.Id.ToString()))
+                foreach (var person in context.Person)
                 {
-                    List<string> projectIds = person.ProjectIds.Length == 0 ? new List<string>() : person.ProjectIds.Split('-').ToList();
-                    projectIds.Add(tempId);
-                    projectIds.Sort();
-                    person.ProjectIds = projectIds.Count == 1 ? projectIds[0] : String.Join('-', projectIds);
+                    if (project.PersonIds.Contains(person.Id.ToString()))
+                    {
+                        List<string> projectIds = person.ProjectIds.Length == 0 ? new List<string>() : person.ProjectIds.Split('-').ToList();
+                        projectIds.Add(tempId);
+                        projectIds.Sort();
+                        person.ProjectIds = projectIds.Count == 1 ? projectIds[0] : String.Join('-', projectIds);
+                    }
                 }
-            }
+            }catch(Exception) { }
 
             #endregion
 

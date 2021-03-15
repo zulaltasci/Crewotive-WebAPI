@@ -173,6 +173,7 @@ namespace BTI_Project1_API.Controllers
             //        project.PersonIds = personIds.Count == 1 ? personIds[0] : String.Join('-', personIds);
             //    }
             //}
+
             person.IsActive = false;
             _context.Entry(person).State = EntityState.Modified;
             await _context.SaveChangesAsync();
