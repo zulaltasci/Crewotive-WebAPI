@@ -57,7 +57,7 @@ Readme
     }
 ```
 > <br>*"projectids" i "1-2" olan bir person un get edildiğindeki çıktısı.*
-> <br><br>*Daha önce silinmiş olan bir proje varsa ve kişi o projede yer alıyorsa, ilgili projenin bilgileri de person get edildiğinde çıktıda yer alır. Projenin kalkmış olduğu da belirtilir.*
+> <br><br>*Daha önce silinmiş olan bir proje varsa ve kişi o projede yer alıyorsa, ilgili projenin bilgileri de person get edildiğinde çıktıda yer alır. Projenin kalkmış olduğu da belirtilir.*<br><br>
 
 <br><br>
 
@@ -84,7 +84,7 @@ Readme
 }
 ```
 > <br>*"projectids" eklenecek proje id lerine göre "1-2-3" şeklinde doldurulur. *
-> <br><br>*Herhangi bir proje eklenmemişse boş gönderilir.*
+> <br><br>*Herhangi bir proje eklenmemişse boş gönderilir.*<br><br>
 
 <br><br>
 
@@ -111,7 +111,7 @@ Readme
 }
 ```
 > <br>*Put edilirken değiştirilen veya değiştirilmeyen tüm bilgiler apiye gönderilir.*
-> <br><br>*Burada 2 adet proje olduğu varsayılıp bu kişide "projectids" düzenlemesi yapılmıştır.*
+> <br><br>*Burada 2 adet proje olduğu varsayılıp bu kişide "projectids" düzenlemesi yapılmıştır.*<br><br>
 
 
 <br><br>
@@ -172,7 +172,7 @@ Readme
         ]
     }
 ```
-> <br>*"personids" i "1" olan bir project in get edildiğindeki çıktısı.*
+> <br>*"personids" i "1" olan bir project in get edildiğindeki çıktısı.*<br><br>
 
 <br><br>
 
@@ -196,7 +196,7 @@ Readme
 ```
 > <br>*"personids" eklenecek person id lerine göre "1-2-3" şeklinde doldurulur. *
 > <br><br>*Herhangi bir person eklenmemişse boş gönderilir.*
-> <br><br>*Burada 3 adet person olduğu varsayılıp eklemesi yapılmıştır.*
+> <br><br>*Burada 3 adet person olduğu varsayılıp eklemesi yapılmıştır.*<br><br>
 
 
 <br><br>
@@ -221,7 +221,7 @@ Readme
 }
 ```
 > <br>*Put edilirken değiştirilen veya değiştirilmeyen tüm bilgiler apiye gönderilir.*
-> <br><br>*Burada put edilirken "2" numaralı person projeden silinmiştir.*
+> <br><br>*Burada put edilirken "2" numaralı person projeden silinmiştir.*<br><br>
 
 <br><br>
 
@@ -262,7 +262,7 @@ Login için url e kullanıcı adı ve şifre gönderilerek get isteğinde bulunu
 }
 ```
 > <br>*Apiye bu bilgilerle get isteği gönderilir. Kullanıcı adı ve şifre eşleşir ise true, eşleşmez ise false döner.*
-> <br><br>*Diğer durumlarda (username null olması, db de olmaması gibi) "BadRequest" döner.*
+> <br><br>*Diğer durumlarda (username null olması, db de olmaması gibi) "BadRequest" döner.*<br><br>
 
 
 <br><br>
@@ -282,9 +282,9 @@ Login için url e kullanıcı adı ve şifre gönderilerek get isteğinde bulunu
 ```json
 {
     "username": "beerkaya",
-    "oldpassword": "123456"
+    "oldpassword": "123456",
     "newpassword": "12345678"
 }
 ```
 > <br>*Kullanıcı adı ve parola eşleşmesi başarılı olursa şifre değiştirilir ve true döner.*
-> <br><br>*Diğer durumlarda false döner.*
+> <br><br>*Diğer durumlarda false döner.*<br><br>
